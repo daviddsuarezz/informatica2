@@ -78,22 +78,97 @@ void ejercicio5() {
 }
 
 void ejercicio6() {
+
     cout << "Ejecutando el ejercicio 12..." << endl;
+    int num =0;
+    int constante = 0;
+    cout << "ingrese un numero";
+    cin >> num;
+    constante = num;
+    for(int i=0; i<6; i ++){
+        if(i<1){
+            cout << constante << "^" << i+1 <<"=" << num << endl;
+            i += 1;
+        }
+        else{
+            num *= constante;
+            cout << constante << "^" << i <<"=" << num << endl;
+        }
+    }
+
 }
 
 void ejercicio7() {
     cout << "Ejecutando el ejercicio 14..." << endl;
+    int ascendente = 1;
+    int descendente = 50;
+    for(int i= 0; i<50; i ++){
+        ascendente += i;
+        descendente -= i;
+        cout << ascendente << "  " << descendente << endl;
+        ascendente = 1;
+        descendente = 50;
+    }
 }
 void ejercicio8() {
     cout << "Ejecutando el ejercicio 16..." << endl;
+    int i = 0;
+    int num = 0;
+    int contador = 0;
+    int promedio = 0;
+    while(i<1){
+        cout << "Ingrese un numero" << endl;
+        cin >> num;
+        contador += 1;
+        promedio += num;
+        if(num==0){
+            if(contador==0){
+                cout<<"no ingresaste numeros";
+            }
+            else{
+                promedio = promedio/(contador-1);
+                cout << "El promedio de los numeros son" << promedio;
+                i += 1;
+            }
+        }
+    }
 }
 
 void ejercicio9() {
     cout << "Ejecutando el ejercicio 18..." << endl;
+    int num = 0;
+    cout << "Ingrese un número: ";
+    cin >> num;
+    int raiz = 1;
+    while (raiz * raiz <= num) {
+        raiz++;
+    }
+    raiz--;
+    if (raiz * raiz == num) {
+        cout << num << " es un cuadrado perfecto";
+    } else {
+        cout << num << " NO es un cuadrado perfecto";
+    }
 }
 
 void ejercicio10() {
     cout << "Ejecutando el ejercicio 20..." << endl;
+    int  num = 0;
+    cout << "Ingresa el numero: " << endl;
+    cin >> num;
+    int aux = num;
+    int inverso = 0;
+    while(aux>0){
+        int digito = aux % 10;
+        inverso = inverso * 10 + digito;
+        aux = aux/10;
+    }
+    if(inverso == num){
+        cout << num << " es palindromo" << endl;
+    }
+    else {
+        cout << num << " no es palindromo" << endl;
+    }
 }
 void ejercicio11() {
     cout << "Ejecutando el ejercicio 22..." << endl;
