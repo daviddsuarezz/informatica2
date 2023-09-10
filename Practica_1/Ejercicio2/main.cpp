@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 void ejercicio1() {
@@ -172,21 +174,135 @@ void ejercicio10() {
 }
 void ejercicio11() {
     cout << "Ejecutando el ejercicio 22..." << endl;
+    int tiempo;
+    int horas, minutos, segundos, residuo;
+    cout << "Ingresa el tiempo: ";
+    cin >> tiempo;
+    horas = tiempo / 3600;
+    tiempo = tiempo % 3600;
+    residuo = tiempo;
+    minutos = residuo / 60;
+    tiempo = residuo % 60;
+    segundos = tiempo;
+    cout << "horas " << horas << " minutos " << minutos << " segundo "<< segundos;
+
+
 }
 
 void ejercicio12() {
     cout << "Ejecutando el ejercicio 24..." << endl;
-}
+    int num;
+    int parametro = 1;
+    int breakpoint = 1;
+    cout << "ingrese el tamaño del cuadrado " << endl;
+    cin >> num;
+        if(breakpoint==1){
+            parametro = 1;
+            while(parametro <= num){
+                cout << "+";
+                parametro += 1;
 
+            }
+            breakpoint = 2;
+
+        }
+        if(breakpoint > 1 && breakpoint <3){
+            int espacios = num-2;
+            int contador = 1;
+            while(contador <= espacios){
+                parametro = 1;
+                cout  << "\n+";
+                while(parametro <= espacios){
+                    cout << " ";
+                    parametro += 1;
+                }
+                cout << "+";
+                contador += 1;
+
+            }
+            breakpoint = num;
+            cout << "\n";
+        }
+        if(breakpoint == num){
+            parametro = 1;
+            while(parametro <= num){
+                cout << "+";
+                parametro += 1;
+            }
+        }
+
+}
 void ejercicio13() {
     cout << "Ejecutando el ejercicio 26..." << endl;
+        cout << "Ingrese tres numeros: ";
+        double a, b, c;
+        cin >> a >> b >> c;
+
+        // se verifica por desigualdad triangular
+        if (a + b > c && a + c > b && b + c > a) {
+            if (a == b && b == c) {
+                cout << "Se forma un triangulo equilatero.\n";
+            }
+            else if (a == b || a == c || b == c) {
+                cout << "Se forma un triangulo isosceles.\n";
+            }
+            else {
+                cout << "Se forma un triangulo escaleno.\n";
+            }
+        } else {
+            cout << "Las longitudes ingresadas no forman un triangulo.\n";
+        }
+
 }
 void ejercicio14() {
     cout << "Ejecutando el ejercicio 28..." << endl;
+    int num;
+    double sumatoria;
+    int contador=3;
+    double pi=0;
+    cout << "Ingrese el numero de elementos utilizados";
+    cin >> num;
+
+    for(int i=3; i <= (num*2)-1; i+=2){
+            double denominador = i;
+            if (contador%2 == 1){
+                sumatoria += ((-1)/denominador);
+            }
+            else{
+                sumatoria += 1/denominador;
+            }
+            contador +=1;
+    }
+    pi = 4*(1+sumatoria);
+    cout << pi;
 }
 
 void ejercicio15() {
+
+    srand(time(NULL)); // Inicializar la semilla del generador
+    int A = rand() % 101; // Obtener un número entre 0 y 100
     cout << "Ejecutando el ejercicio 30..." << endl;
+    bool parametro = true;
+    int num = 0;
+    int contador = 0;
+    cout << "He generado un numero del 1 al 100 para ti" << endl;
+
+    while(parametro){
+            cout << "Ingresa el numero: " << endl;
+            cin >> num;
+                if (num < A) {
+                cout << "El numero que ingresaste es menor que el numero secreto.\n";
+            }
+            else if (num > A) {
+                cout << "El numero que ingresaste es mayor que el numero secreto.\n";
+            }
+            else {
+                cout << "Felicitaciones, has adivinado el numero secreto!\n";
+                cout << "El numero secreto era: " << A << "\n";
+                cout << "Has tardado " << contador << " intentos en adivinarlo.\n";
+            }
+            contador += 1;
+    }
 }
 
 
