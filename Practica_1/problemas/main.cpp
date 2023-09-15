@@ -34,15 +34,23 @@ void ejercicio2() {
      if(minutos1 > 60 || minutos2 >60){
         cout << "formato incorrecto";
     }
+     else if(horas1 > 23|| horas2 > 23){
+        cout << "formato invalido";
+     }
     else {
         int horasnuevas = horas1+horas2;
         int minutosnuevos = minutos1+minutos2;
-        if(minutosnuevos > 60){
+        if(minutosnuevos > 59){
             int masH = minutosnuevos / 60;
             horasnuevas += masH;
             minutosnuevos = minutosnuevos % 60;
         }
-        cout << "lo nuevo es " << horasnuevas << ":" << minutosnuevos;
+        if(horasnuevas > 24){
+          cout << "lo nuevo es " << horasnuevas%24 << ":" << minutosnuevos;
+        }
+        else{
+          cout << "lo nuevo es: " << horasnuevas << ":" << minutosnuevos;
+        }
     }
     }
 void ejercicio3() {
@@ -148,24 +156,25 @@ void ejercicio5() {
     int contador = 0;
     cout << "ingrea el n primo: " <<endl;
         cin >> num;
-     while(contador <= num){
+     while(contador < num){
             int divisible = 0;
             for (int i = 2; i < n; i++) {
             // Si el número es divisible por i, no es primo
             if (n % i == 0) {
                 divisible += 1;
             }
-            else if(divisible==0){
-                contador += 1;
-                primo = n;
+            }
+            if(divisible==0){
+            contador += 1;
+            primo = n;
             }
 
+         n += 1;
         }
-        n += 1;
+        cout << "El primo numero " << num<<" es: " <<primo;
 
 }
-     cout << "El primo numero 4 es: "<<primo;
-}
+
 
 void ejercicio6() {
       cout << "Ejecutando el ejercicio 12.. \n";
@@ -174,11 +183,10 @@ void ejercicio6() {
       cout << "ingrea el numero primo: " <<endl;
       cin >> n;
       int num = n;
-      for (int i = 2; i * i <= n; i++) {
+      for (int i = 2; i <= n; i++) {
         if (n % i == 0) {
             while (n % i == 0) {
                 n /= i;
-                cout << n;
             }
             maximo = i;
         }
@@ -186,7 +194,7 @@ void ejercicio6() {
       if (n > 1) {
         maximo = n;
       }
-      cout <<"el mayor factor primo de " <<num<< maximo;
+      cout <<"el mayor factor primo de " << num << " es: "<< maximo;
 }
 bool es_palindromo(int n){
       int invertido = 0;
