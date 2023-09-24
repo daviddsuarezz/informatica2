@@ -1,8 +1,7 @@
-#include <QCoreApplication>
-
-int main(int argc, char *argv[])
+#include <iostream>
+#include "ejercicios.h"
+using namespace std;
+int main()
 {
-    QCoreApplication a(argc, argv);
-
-    return a.exec();
+    problema5();
 }
