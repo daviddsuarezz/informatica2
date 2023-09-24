@@ -337,18 +337,15 @@ char letra_aleatoria();
     }
     int** rotarMatriz(int** m) {
         // Crear una nueva matriz dinámica de 5x5
-        int** r = new int*[5];
+        int** r = new int*[5]; // se crea un puntero doble que estará apuntando a un arreglo de punteros
         for (int i = 0; i < 5; i++) {
-            r[i] = new int[5];
+            r[i] = new int[5]; // luego a cada puntero de ese arreglo se le asigna un arreglo de 5 espacos
         }
         // Recorrer la matriz original y asignar los valores rotados a la nueva matriz
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
             // La fila i se convierte en la columna (4 - j) y la columna j se convierte en la fila i
-            r[i][j] = m[4 - j][i];
-            cout << i;
-            cout <<4- j;
-            }
+            r[i][j] = m[4 - j][i]; // la posicion 0,0 sera la posicion 0,4 osea la primer columna, se convierte en la primera fila pero al reves
         }
         // Devolver la nueva matriz rotada
         return r;
@@ -389,7 +386,7 @@ char letra_aleatoria();
         for (int i = 0; i < 5; i++) {
             cout << "| ";
             for (int j = 0; j < 5; j++) {
-            cout << setw(2) << r[i][j] << " ";
+            cout << setw(2) << r[i][j] << " "; // el setw sirve para alinear.
             }
             cout << "|" << endl;
         }
@@ -414,11 +411,10 @@ char letra_aleatoria();
         }
         // Liberar la memoria de las matrices dinámicas
         for (int i = 0; i < 5; i++) {
-            delete[] m[i];
+            delete[] m[i]; // eliminamos primero las columnas, por medio de las filas osea del arreglo de punteros
             delete[] r[i];
         }
-        delete[] m;
+        delete[] m; // esto hace referencia al arreglo de puntero, que en teoria son las filas.
         delete[] r;
-
 
     }
