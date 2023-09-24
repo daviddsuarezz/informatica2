@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <string>
-#include <utility> // Para usar pair
+#include <iomanip>
 
 using namespace std;
 char letra_aleatoria();
@@ -235,8 +235,190 @@ char letra_aleatoria();
         }
         //https://www.tinkercad.com/things/4Jcexjn2Upw
     }
+    bool estaRepetido(int m[][10], int num, int valor, int fila, int columna){
 
+        for(int i = 0; i < num; i++){
 
-    void problema6(){
+            for(int j = 0; j < num; j++){
+                if(m[i][j] == valor && (i!= fila || j != columna ) ){
+                    return true;
+                }
+            }
+        }
+        return false;
+
+    }
+
+    int problema6(){
+        int n;
+        cout << "ingrese el tamaño de la matriz cuadrada " << endl;
+        cin >> n;
+        if(n <= 0){
+            cout << "El tamaño debe ser un numero entero postivo";
+        }
+        int m[10][10];
+        for(int i = 0; i < n; i++){
+
+            for(int j = 0; j < n; j++){
+                m[i][j] = 0;
+            }
+        }
+        cout << "ingrese los valores de la matriz: " << endl;
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                cout << "m[" << i << "][" << j << "] = ";
+                cin >> m[i][j];
+                // Validar que el valor sea válido y no esté repetido
+                if (m[i][j] <= 0 || estaRepetido(m, n, m[i][j], i, j)) {
+                    cout << "El valor debe ser un número entero positivo y no debe repetirse" << endl;
+                        return 0;
+                }
+            }
+        }
+        cout << "La matriz ingresada es:" << endl;
+        for (int i = 0; i < n; i++) {
+            cout << "| ";
+            for (int j = 0; j < n; j++) {
+                // Usar setw para alinear los valores
+                cout << setw(3) << m[i][j] << " ";
+            }
+            cout << "|" << endl;
+        }
+        int constante = 0;
+            for (int j = 0; j < n; j++) {
+            constante += m[0][j];
+        }
+
+        bool esmagico = true;
+        // Comparar la suma de los valores de las demás filas con la constante
+        for(int i = 1; i < n && esmagico; i++){
+            int sumaFila = 0;
+            for (int j = 0; j<n; j++){
+                sumaFila += m[i][j];
+            }
+            if(sumaFila != constante){
+                esmagico = false;
+            }
+        }
+        // Comparar la suma de los valores de las columnas con la constante
+        for(int j=0; j < n && esmagico; j++){
+            int sumaCol = 0;
+            for(int i = 0; i < n; i++){
+                sumaCol += m[i][j];
+            }
+        if(sumaCol != constante){
+            esmagico = false;
+        }
+        }
+
+        int sumaDiag1 = 0;
+        for(int i = 0; i<n; i++){
+            sumaDiag1 += m[i][i];
+
+        }
+        if(sumaDiag1 != constante){
+            esmagico = false;
+        }
+        // Comparar la suma de los valores de la diagonal secundaria con la constante
+        int sumaDiag2 = 0;
+        for (int i = 0; i < n; i++) {
+            sumaDiag2 += m[i][n - i - 1];
+        }
+        if (sumaDiag2 != constante) {
+            esmagico = false;
+        }
+        if (esmagico) {
+            cout << "La matriz es un cuadrado mágico" << endl;
+        }
+        else {
+            cout << "La matriz no es un cuadrado mágico" << endl;
+        }
+
+    }
+    int** rotarMatriz(int** m) {
+        // Crear una nueva matriz dinámica de 5x5
+        int** r = new int*[5];
+        for (int i = 0; i < 5; i++) {
+            r[i] = new int[5];
+        }
+        // Recorrer la matriz original y asignar los valores rotados a la nueva matriz
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+            // La fila i se convierte en la columna (4 - j) y la columna j se convierte en la fila i
+            r[i][j] = m[4 - j][i];
+            cout << i;
+            cout <<4- j;
+            }
+        }
+        // Devolver la nueva matriz rotada
+        return r;
+    }
+
+    void problema7(){
+        int** m = new int*[5];
+        for (int i = 0; i < 5; i++) {
+            m[i] = new int[5];
+            for (int j = 0; j < 5; j++) {
+            m[i][j] = 0;
+            }
+        }
+        int contador = 1;
+        // Usar dos bucles anidados para recorrer la matriz por filas y columnas
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+            // Asignar el valor del contador a cada celda de la matriz e incrementar el contador en uno
+            m[i][j] = contador;
+            contador++;
+            }
+        }
+        // Imprimir la matriz original en la salida estándar, usando un formato adecuado para mostrar los valores alineados
+        cout << "Matriz original:" << endl;
+        for (int i = 0; i < 5; i++) {
+            cout << "| ";
+            for (int j = 0; j < 5; j++) {
+            // Usar setw para alinear los valores
+            cout << setw(2) << m[i][j] << " ";
+            }
+            cout << "|" << endl;
+        }
+        int** r;
+        // Llamar a la función con la matriz original y guardar el resultado en la variable
+        r = rotarMatriz(m);
+        // Imprimir la matriz rotada 90 grados en la salida estándar, usando el mismo formato que antes
+        cout << "Matriz rotada 90 grados:" << endl;
+        for (int i = 0; i < 5; i++) {
+            cout << "| ";
+            for (int j = 0; j < 5; j++) {
+            cout << setw(2) << r[i][j] << " ";
+            }
+            cout << "|" << endl;
+        }
+        // Repetir los pasos anteriores dos veces más, usando la matriz rotada como argumento de la función, para obtener las matrices rotadas 180 y 270 grados
+        r = rotarMatriz(r);
+        cout << "Matriz rotada 180 grados:" << endl;
+        for (int i = 0; i < 5; i++) {
+            cout << "| ";
+            for (int j = 0; j < 5; j++) {
+            cout << setw(2) << r[i][j] << " ";
+            }
+            cout << "|" << endl;
+        }
+        r = rotarMatriz(r);
+        cout << "Matriz rotada 270 grados:" << endl;
+        for (int i = 0; i < 5; i++) {
+            cout << "| ";
+            for (int j = 0; j < 5; j++) {
+            cout << setw(2) << r[i][j] << " ";
+            }
+            cout << "|" << endl;
+        }
+        // Liberar la memoria de las matrices dinámicas
+        for (int i = 0; i < 5; i++) {
+            delete[] m[i];
+            delete[] r[i];
+        }
+        delete[] m;
+        delete[] r;
+
 
     }
