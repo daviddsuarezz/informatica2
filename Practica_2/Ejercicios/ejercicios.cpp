@@ -20,7 +20,8 @@ char letra_aleatoria();
     void probar_funcion_c(){
         // Crear un arreglo de tipo double con los valores a promediar
         double a[] = {1.5, 2.3, 4.7, 3.2};
-        // Crear una variable de tipo int con el tamaño del arreglo
+        // Crear una variable de tipo int con el tamaño del arreglo, el sizeof nos entrega el tamaño total de bytes que ocupa el arreglo
+        // entonces se divide por un elementro que ocupe el arreglo, para asi tener el tamaño real de este
         int n = sizeof(a) / sizeof(a[0]);
         // Crear dos variables de tipo double para almacenar el resultado del promedio y la suma
         double promedio, suma;
@@ -350,8 +351,8 @@ char letra_aleatoria();
         // Devolver la nueva matriz rotada
         return r;
     }
-
-    void problema7(){
+    }
+    void problema7() {
         int** m = new int*[5];
         for (int i = 0; i < 5; i++) {
             m[i] = new int[5];
@@ -416,5 +417,57 @@ char letra_aleatoria();
         }
         delete[] m; // esto hace referencia al arreglo de puntero, que en teoria son las filas.
         delete[] r;
+    }
 
+    // se necesita el factorial para poder calcular el coeficiente binomial
+    // todo este analisis y la utilizacion de este coeficiente viene de que el problema es estadistico
+    // y este necesita encontrar todas las combinaciones posibles sin importan el orden, la formula del coeficiente es
+    // n!/k!(n-k)!
+     long long  factorial(int n){
+        long long factorial=1;
+        for(int i = 1; i <= n; i++){
+            factorial = factorial * i;
+        }
+        return factorial;
+    }
+    // aqui calculamos la formula dicha anteriormente
+     long long  binomial(int n, int k){
+        return factorial(n)/(factorial(k)*factorial(n-k));
+    }
+    void problema8(){
+        int n;
+        cout << "Ingrese el valor de n: ";
+        cin >> n;
+        // se toma dos n, ya que pueden ser dos decisiones, hacia la derecha o hacia abajo
+         long long  caminos = binomial(2 * n,n);
+        cout << "Para una malla de " << n << "x" << n << " puntos hay " << caminos << " caminos." << endl;
+    }
+
+    string permutacion_lexicografica(int n){
+
+        int digitos[10]={0,1,2,3,4,5,6,7,8,9};
+        string resultado = "";
+        n--; //para ajustar los indices, ya que el arreglo comienza en cero
+        for(int i= 9; i>=0; i--){
+            long long fac = factorial(i);
+            //esta es la parte mas importante, dividimos el numero de permutacion, con el numero de combinaciones posibles con esa cantidad de digitos
+            //y esta division nos dará un indice, el cual nos indica la posicion del numero que va en la permutacion lexicografica
+            int indice = n/fac;
+            resultado += to_string(digitos[indice]);
+            for(int j = indice; j < 9; j++){
+            digitos[j] = digitos[j+1]; // le quitams esa posicion al arreglo
+            }
+            n = n%fac; //para seguir con el n, ya que lo debemos variar
+        }
+        return resultado;
+    }
+
+    void problema9(){
+        int n;
+        cout << "Ingrese el valor de n: ";
+        cin >> n;
+        // Llamar a la función permutacion_lexicografica con el valor de n
+        string permutacion = permutacion_lexicografica(n);
+        // Imprimir el resultado
+        cout << "La permutacion numero " << n << " es: " << permutacion << endl;
     }
