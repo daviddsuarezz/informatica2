@@ -487,7 +487,7 @@ void registrar_usuario() {
 
     usuarios[usuario.cedula] = usuario; // Almacenar el nuevo usuario en el mapa
 }
-/*
+
 int main (){
     int opcion1 = 0;
     string tipo = "";
@@ -556,12 +556,6 @@ int main (){
         break;
     }
 
-
-}
-*/
-int main(){
-    prueba_codificar();
-    prueba_decodificar();
 
 }
 
